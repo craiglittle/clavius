@@ -23,6 +23,13 @@ module Clavius
         .select(&method(:active?))
     end
 
+    def active?(date)
+      date = date.to_date
+
+      (weekdays.include?(date.wday) || included.include?(date)) &&
+        !excluded.include?(date)
+    end
+
     protected
 
     attr_reader :configuration

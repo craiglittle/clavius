@@ -46,4 +46,116 @@ RSpec.describe Clavius::Schedule do
       ]
     end
   end
+
+  describe '#active?' do
+    let(:weekdays) { %i[mon tue wed thu] }
+    let(:included) {
+      [
+        Date.new(2012, 1, 3),
+        Date.new(2012, 1, 4),
+        Date.new(2012, 1, 6),
+        Date.new(2012, 1, 7)
+      ]
+    }
+    let(:excluded) {
+      [
+        Date.new(2012, 1, 4),
+        Date.new(2012, 1, 5),
+        Date.new(2012, 1, 7),
+        Date.new(2012, 1, 8)
+      ]
+    }
+
+    context 'when the date is date-like' do
+      let(:date) { Time.new(2012, 1, 1) }
+
+      it 'does not blow up' do
+        expect { schedule.active?(date) }.not_to raise_error
+      end
+    end
+
+    context 'when the date is not date-like' do
+      let(:date) { 'date' }
+
+      it 'blows up' do
+        expect { schedule.active?(date) }.to raise_error
+      end
+    end
+
+    context 'when the date falls on a configured weekday' do
+      context "and is an explicit 'included' exception" do
+        context "and is an explicit 'excluded' exception" do
+          let(:date) { Date.new(2012, 1, 4) }
+
+          it 'returns false' do
+            expect(schedule.active?(date)).to eq false
+          end
+        end
+
+        context "and is not an explicit 'excluded' exception" do
+          let(:date) { Date.new(2012, 1, 3) }
+
+          it 'returns true' do
+            expect(schedule.active?(date)).to eq true
+          end
+        end
+      end
+
+      context "and is not an explicit 'included' exception" do
+        context "and is an explicit 'excluded' exception" do
+          let(:date) { Date.new(2012, 1, 5) }
+
+          it 'returns false' do
+            expect(schedule.active?(date)).to eq false
+          end
+        end
+
+        context "and is not an explicit 'excluded' exception" do
+          let(:date) { Date.new(2012, 1, 2) }
+
+          it 'returns true' do
+            expect(schedule.active?(date)).to eq true
+          end
+        end
+      end
+    end
+
+    context 'when the date does not fall on a configured weekday' do
+      context "and is an explicit 'included' exception" do
+        context "and is an explicit 'excluded' exception" do
+          let(:date) { Date.new(2012, 1, 7) }
+
+          it 'returns false' do
+            expect(schedule.active?(date)).to eq false
+          end
+        end
+
+        context "and is not an explicit 'excluded' exception" do
+          let(:date) { Date.new(2012, 1, 6) }
+
+          it 'returns true' do
+            expect(schedule.active?(date)).to eq true
+          end
+        end
+      end
+
+      context "and is not an explicit 'included' exception" do
+        context "and is an explicit 'excluded' exception" do
+          let(:date) { Date.new(2012, 1, 8) }
+
+          it 'returns false' do
+            expect(schedule.active?(date)).to eq false
+          end
+        end
+
+        context "and is not an explicit 'excluded' exception" do
+          let(:date) { Date.new(2012, 1, 1) }
+
+          it 'returns false' do
+            expect(schedule.active?(date)).to eq false
+          end
+        end
+      end
+    end
+  end
 end
