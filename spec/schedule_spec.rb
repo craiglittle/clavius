@@ -158,4 +158,12 @@ RSpec.describe Clavius::Schedule do
       end
     end
   end
+
+  describe '#days' do
+    it 'returns the active day after the specified number of active days' do
+      expect(schedule.days(5).after(Date.new(2012, 1, 10))).to eq(
+        Date.new(2012, 1, 20)
+      )
+    end
+  end
 end

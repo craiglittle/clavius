@@ -30,6 +30,10 @@ module Clavius
         !excluded.include?(date)
     end
 
+    def days(number)
+      Calculation::DaysFrom.new(self, number)
+    end
+
     protected
 
     attr_reader :configuration
