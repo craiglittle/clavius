@@ -34,6 +34,11 @@ module Clavius
       Calculation::DaysFrom.new(self, number)
     end
 
+    def between(start_date, end_date)
+      start_date.to_date.upto(end_date.to_date.prev_day)
+        .select(&method(:active?))
+    end
+
     protected
 
     attr_reader :configuration

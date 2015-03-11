@@ -166,4 +166,47 @@ RSpec.describe Clavius::Schedule do
       )
     end
   end
+
+  describe '#between' do
+    let(:weekdays) { %i[mon tue wed thu] }
+    let(:included) { [Date.new(2012, 1, 3), Date.new(2012, 1, 6)] }
+    let(:excluded) { [Date.new(2012, 1, 4)] }
+
+    context 'when the start date is the end date' do
+      let(:start_date) { Date.new(2012, 1, 2) }
+      let(:end_date)   { start_date }
+
+      it 'returns no dates' do
+        expect(schedule.between(start_date, end_date)).to eq []
+      end
+    end
+
+    context 'when the start date is after the end date' do
+      let(:start_date) { Date.new(2013) }
+      let(:end_date)   { Date.new(2012) }
+
+      it 'returns no dates' do
+        expect(schedule.between(start_date, end_date)).to eq []
+      end
+    end
+
+    context 'when the start date is before the end date' do
+      let(:start_date) { Date.new(2012, 1, 1) }
+      let(:end_date)   { Date.new(2012, 1, 17) }
+
+      it 'returns the correct dates' do
+        expect(schedule.between(start_date, end_date)).to eq [
+          Date.new(2012, 1, 2),
+          Date.new(2012, 1, 3),
+          Date.new(2012, 1, 5),
+          Date.new(2012, 1, 6),
+          Date.new(2012, 1, 9),
+          Date.new(2012, 1, 10),
+          Date.new(2012, 1, 11),
+          Date.new(2012, 1, 12),
+          Date.new(2012, 1, 16)
+        ]
+      end
+    end
+  end
 end
