@@ -5,3 +5,7 @@ gemspec
 group :development do
   gem 'bump', '~> 0.5.0', require: false
 end
+
+group :test do
+  gem 'codeclimate-test-reporter', '~> 0.4', require: false
+end
