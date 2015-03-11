@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require 'irb'
+
+require 'clavius'
+
+TEST_SCHEDULE = Clavius::Schedule.new do |c|
+  c.weekdays = %i[mon tue wed thu fri]
+  c.included = [Date.new(2015, 6, 1)]
+  c.excluded = [Date.new(2015, 1, 1), Date.new(2015, 12, 25)]
+end
+
+IRB.start
