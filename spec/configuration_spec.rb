@@ -11,6 +11,12 @@ RSpec.describe Clavius::Configuration do
   let(:included) { [Date.new(2015, 1, 1), Date.new(2015, 1, 8)] }
   let(:excluded) { [Date.new(2015, 1, 2), Date.new(2015, 1, 9)] }
 
+  context 'when initialized without a block' do
+    it 'does not blow up' do
+      expect { described_class.new }.not_to raise_error
+    end
+  end
+
   describe '#weekdays' do
     it 'returns the associated wdays' do
       expect(configuration.weekdays).to eq Set[1, 3, 5]

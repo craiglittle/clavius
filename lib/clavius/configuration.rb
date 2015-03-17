@@ -4,7 +4,7 @@ module Clavius
     include Memoizable
 
     def initialize
-      @raw = Raw.new.tap do |raw| yield raw end
+      @raw = Raw.new.tap do |raw| yield raw if block_given? end
     end
 
     def weekdays
