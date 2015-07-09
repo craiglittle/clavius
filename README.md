@@ -27,13 +27,13 @@ end
 ## Usage
 
 ```ruby
-Clavius.active?(Date.new(2014, 1, 5))
+Clavius.active?(Date.new(2015, 1, 5))
 
 Clavius.days(5).before(Date.new(2015, 1, 5))
 
 Clavius.days(2).after(Date.new(2015, 1, 5))
 
-Clavius.between(Date.new(2006, 1, 1), Date.new(2006, 1, 8))
+Clavius.between(Date.new(2015, 1, 1), Date.new(2015, 1, 8))
 ```
 
 ## Contributing
