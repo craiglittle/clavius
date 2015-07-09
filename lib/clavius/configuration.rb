@@ -38,11 +38,9 @@ module Clavius
 
     Raw = Struct.new(:weekdays, :included, :excluded) do
       module Default
-
         WEEKDAYS = Set.new(%i[mon tue wed thu fri])
         INCLUDED = Set.new
         EXCLUDED = Set.new
-
       end
 
       def initialize(*)
