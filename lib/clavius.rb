@@ -1,5 +1,6 @@
-require 'set'
+require 'date'
 require 'forwardable'
+require 'set'
 
 require 'memoizable'
 
