@@ -78,7 +78,7 @@ RSpec.describe Clavius::Schedule do
       let(:date) { 'date' }
 
       it 'blows up' do
-        expect { schedule.active?(date) }.to raise_error
+        expect { schedule.active?(date) }.to raise_error NoMethodError
       end
     end
 

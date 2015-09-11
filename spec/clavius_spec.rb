@@ -71,7 +71,7 @@ RSpec.describe Clavius do
     before { Thread.current[:clavius_schedule] = nil }
 
     it 'fails hard' do
-      expect { described_class.weekdays }.to raise_error
+      expect { described_class.weekdays }.to raise_error RuntimeError
     end
   end
 end
