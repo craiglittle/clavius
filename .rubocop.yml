@@ -1,0 +1,22 @@
+AllCops:
+  Include:
+    - 'Rakefile'
+  Exclude:
+    - 'bin/**/*'
+    - 'vendor/**/*'
+
+Style/AndOr:
+  EnforcedStyle: conditionals
+
+Style/BlockDelimiters:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/EmptyLinesAroundClassBody:
+  EnforcedStyle: empty_lines
+
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    '%i': '[]'

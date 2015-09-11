@@ -23,8 +23,8 @@ RSpec.describe Clavius::Schedule do
     end
   end
 
-  describe "#before" do
-    it "returns active dates before the specified origin date" do
+  describe '#before' do
+    it 'returns active dates before the specified origin date' do
       expect(schedule.before(Date.new(2012, 1, 13)).take(5).to_a).to eq [
         Date.new(2012, 1, 11),
         Date.new(2012, 1, 8),
@@ -35,8 +35,8 @@ RSpec.describe Clavius::Schedule do
     end
   end
 
-  describe "#after" do
-    it "returns active dates after the specified origin date" do
+  describe '#after' do
+    it 'returns active dates after the specified origin date' do
       expect(schedule.after(Date.new(2012, 1, 1)).take(5).to_a).to eq [
         Date.new(2012, 1, 4),
         Date.new(2012, 1, 6),
