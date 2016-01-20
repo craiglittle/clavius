@@ -8,21 +8,24 @@ module Clavius
     end
 
     def weekdays
-      raw.weekdays
+      raw
+        .weekdays
         .select(&Time::WEEKDAYS.method(:include?))
         .map(&Time::WEEKDAYS.method(:index))
         .to_set
     end
 
     def included
-      raw.included
+      raw
+        .included
         .select { |date| date.respond_to?(:to_date) }
         .map(&:to_date)
         .to_set
     end
 
     def excluded
-      raw.excluded
+      raw
+        .excluded
         .select { |date| date.respond_to?(:to_date) }
         .map(&:to_date)
         .to_set

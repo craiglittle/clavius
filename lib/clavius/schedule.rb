@@ -14,12 +14,20 @@ module Clavius
     ] => :configuration
 
     def before(date)
-      date.to_date.prev_day.downto(Time::BIG_BANG).lazy
+      date
+        .to_date
+        .prev_day
+        .downto(Time::BIG_BANG)
+        .lazy
         .select(&method(:active?))
     end
 
     def after(date)
-      date.to_date.next_day.upto(Time::HEAT_DEATH).lazy
+      date
+        .to_date
+        .next_day
+        .upto(Time::HEAT_DEATH)
+        .lazy
         .select(&method(:active?))
     end
 
@@ -35,7 +43,9 @@ module Clavius
     end
 
     def between(start_date, end_date)
-      start_date.to_date.upto(end_date.to_date.prev_day)
+      start_date
+        .to_date
+        .upto(end_date.to_date.prev_day)
         .select(&method(:active?))
     end
 
