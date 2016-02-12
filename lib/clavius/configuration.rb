@@ -1,49 +1,52 @@
 module Clavius
   class Configuration
 
-    include Memoizable
-
     def initialize
       @raw = Raw.new.tap do |raw| yield raw if block_given? end
     end
 
     def weekdays
-      raw
-        .weekdays
-        .select(&Time::WEEKDAYS.method(:include?))
-        .map(&Time::WEEKDAYS.method(:index))
-        .to_set
+      @weekdays ||= begin
+        raw
+          .weekdays
+          .select(&Time::WEEKDAYS.method(:include?))
+          .map(&Time::WEEKDAYS.method(:index))
+          .to_set
+          .freeze
+      end
     end
 
     def included
-      raw
-        .included
-        .select { |date| date.respond_to?(:to_date) }
-        .map(&:to_date)
-        .to_set
+      @included ||= begin
+        raw
+          .included
+          .select { |date| date.respond_to?(:to_date) }
+          .map(&:to_date)
+          .to_set
+          .freeze
+      end
     end
 
     def excluded
-      raw
-        .excluded
-        .select { |date| date.respond_to?(:to_date) }
-        .map(&:to_date)
-        .to_set
+      @excluded ||= begin
+        raw
+          .excluded
+          .select { |date| date.respond_to?(:to_date) }
+          .map(&:to_date)
+          .to_set
+          .freeze
+      end
     end
 
     protected
 
     attr_reader :raw
 
-    memoize :weekdays,
-            :included,
-            :excluded
-
     Raw = Struct.new(:weekdays, :included, :excluded) do
       module Default
-        WEEKDAYS = Set.new(%i[mon tue wed thu fri])
-        INCLUDED = Set.new
-        EXCLUDED = Set.new
+        WEEKDAYS = Set.new(%i[mon tue wed thu fri]).freeze
+        INCLUDED = Set.new.freeze
+        EXCLUDED = Set.new.freeze
       end
 
       def initialize(*)

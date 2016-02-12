@@ -2,8 +2,6 @@ require 'date'
 require 'forwardable'
 require 'set'
 
-require 'memoizable'
-
 module Clavius
   class << self
 
