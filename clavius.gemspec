@@ -5,8 +5,8 @@ Gem::Specification.new do |gem|
   gem.version     = Clavius::VERSION
   gem.authors     = ['Craig Little']
   gem.email       = %w[craiglttl@gmail.com]
-  gem.summary     = %[Date calculations]
-  gem.description = %[Date calculations based on a schedule.]
+  gem.summary     = 'Date calculations'
+  gem.description = 'Date calculations based on a schedule.'
   gem.homepage    = 'https://github.com/craiglittle/clavius'
   gem.license     = 'MIT'
   gem.files       = Dir['lib/**/*', 'README.md']

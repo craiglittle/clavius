@@ -8,7 +8,7 @@ RSpec.describe Clavius do
       end
     end
 
-    after { Thread.current[:clavius_schedule] = nil }
+    after do Thread.current[:clavius_schedule] = nil end
 
     describe '.weekdays' do
       it 'delegates to the top-level schedule' do
@@ -68,7 +68,7 @@ RSpec.describe Clavius do
   end
 
   context 'when not configured' do
-    before { Thread.current[:clavius_schedule] = nil }
+    before do Thread.current[:clavius_schedule] = nil end
 
     it 'fails hard' do
       expect { described_class.weekdays }.to raise_error RuntimeError

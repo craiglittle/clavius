@@ -1,15 +1,12 @@
 AllCops:
-  Include:
-    - 'Rakefile'
   Exclude:
     - 'bin/**/*'
-    - 'vendor/**/*'
 
 Style/AndOr:
   EnforcedStyle: conditionals
 
 Style/BlockDelimiters:
-  Enabled: false
+  EnforcedStyle: semantic
 
 Style/Documentation:
   Enabled: false
@@ -23,3 +20,8 @@ Style/MultilineOperationIndentation:
 Style/PercentLiteralDelimiters:
   PreferredDelimiters:
     '%i': '[]'
+    '%w': '[]'
+    '%W': '[]'
+
+Style/SignalException:
+  EnforcedStyle: semantic
