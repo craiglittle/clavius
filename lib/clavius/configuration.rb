@@ -17,30 +17,26 @@ module Clavius
     end
 
     def included
-      @included ||= begin
-        raw
-          .included
-          .select { |date| date.respond_to?(:to_date) }
-          .map(&:to_date)
-          .to_set
-          .freeze
-      end
+      @included ||= exception_configuration(raw.included)
     end
 
     def excluded
-      @excluded ||= begin
-        raw
-          .excluded
-          .select { |date| date.respond_to?(:to_date) }
-          .map(&:to_date)
-          .to_set
-          .freeze
-      end
+      @excluded ||= exception_configuration(raw.excluded)
     end
 
     protected
 
     attr_reader :raw
+
+    private
+
+    def exception_configuration(dates)
+      dates
+        .select { |date| date.respond_to?(:to_date) }
+        .map(&:to_date)
+        .to_set
+        .freeze
+    end
 
     Raw = Struct.new(:weekdays, :included, :excluded) do
       module Default
