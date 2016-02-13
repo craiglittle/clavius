@@ -1,7 +1,3 @@
-AllCops:
-  Exclude:
-    - 'bin/**/*'
-
 Style/AndOr:
   EnforcedStyle: conditionals
 
