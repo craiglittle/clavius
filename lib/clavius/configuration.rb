@@ -9,8 +9,8 @@ module Clavius
       @weekdays ||= begin
         raw
           .weekdays
-          .select(&Time::WEEKDAYS.method(:include?))
-          .map(&Time::WEEKDAYS.method(:index))
+          .select { |weekday| Time::WEEKDAYS.include?(weekday) }
+          .map    { |weekday| Time::WEEKDAYS.index(weekday) }
           .to_set
           .freeze
       end
