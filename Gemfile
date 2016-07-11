@@ -7,7 +7,7 @@ group :development do
 end
 
 group :test do
-  gem 'codeclimate-test-reporter', '~> 0.4.0', require: false
+  gem 'codeclimate-test-reporter', '~> 0.6.0', require: false
 end
 
 group :development, :test do
