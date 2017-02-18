@@ -22,7 +22,7 @@ RSpec.describe Clavius::Calculation::DaysFrom do
       end
     end
 
-    context 'with an valid integer-like value' do
+    context 'with a valid integer-like value' do
       let(:number_of_days) { '1' }
 
       it 'is successful' do
