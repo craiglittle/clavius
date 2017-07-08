@@ -1,3 +1,12 @@
+Layout/EmptyLinesAroundClassBody:
+  EnforcedStyle: empty_lines
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+Layout/MultilineOperationIndentation:
+  EnforcedStyle: indented
+
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*.rb'
@@ -10,15 +19,6 @@ Style/BlockDelimiters:
 
 Style/Documentation:
   Enabled: false
-
-Style/EmptyLinesAroundClassBody:
-  EnforcedStyle: empty_lines
-
-Style/MultilineMethodCallIndentation:
-  EnforcedStyle: indented
-
-Style/MultilineOperationIndentation:
-  EnforcedStyle: indented
 
 Style/PercentLiteralDelimiters:
   PreferredDelimiters:
