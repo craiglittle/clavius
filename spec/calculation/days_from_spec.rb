@@ -1,5 +1,5 @@
 RSpec.describe Clavius::Calculation::DaysFrom do
-  subject(:calculation) { described_class.new(schedule, number_of_days) }
+  subject(:calculation) { described_class.new(schedule, number) }
 
   let(:schedule) {
     Clavius::Schedule.new do |c|
@@ -9,11 +9,9 @@ RSpec.describe Clavius::Calculation::DaysFrom do
     end
   }
 
-  let(:number_of_days) { 10 }
-
   context 'when initializing' do
-    context 'with an integer number of days' do
-      let(:number_of_days) { 1 }
+    context 'with an integer' do
+      let(:number) { 1 }
 
       it 'is successful' do
         expect(calculation.after(Date.new(2012, 1, 1))).to eq(
@@ -23,7 +21,7 @@ RSpec.describe Clavius::Calculation::DaysFrom do
     end
 
     context 'with a valid integer-like value' do
-      let(:number_of_days) { '1' }
+      let(:number) { '1' }
 
       it 'is successful' do
         expect(calculation.after(Date.new(2012, 1, 1))).to eq(
@@ -33,7 +31,7 @@ RSpec.describe Clavius::Calculation::DaysFrom do
     end
 
     context 'with an invalid integer-like value' do
-      let(:number_of_days) { '1one' }
+      let(:number) { '1one' }
 
       it 'fails hard' do
         expect { calculation }.to raise_error ArgumentError
@@ -41,27 +39,83 @@ RSpec.describe Clavius::Calculation::DaysFrom do
     end
 
     context 'with a non-integer value' do
-      let(:number_of_days) { [] }
+      let(:number) { [] }
 
       it 'fails hard' do
         expect { calculation }.to raise_error TypeError
       end
     end
+
+    context 'with a negative integer' do
+      let(:number) { -1 }
+
+      it 'fails hard' do
+        expect { calculation }.to raise_error ArgumentError
+      end
+    end
   end
 
   describe '#before' do
-    it 'returns the date the number of active days before the origin date' do
-      expect(calculation.before(Date.new(2012, 1, 18))).to eq(
-        Date.new(2012, 1, 2)
-      )
+    context 'when the number is non-zero' do
+      let(:number) { 10 }
+
+      it 'returns the appropriate date before the origin' do
+        expect(calculation.before(Date.new(2012, 1, 18))).to eq(
+          Date.new(2012, 1, 2)
+        )
+      end
+    end
+
+    context 'when the number is zero' do
+      let(:number) { 0 }
+
+      context 'and the origin is active' do
+        let(:origin) { Date.new(2012, 1, 11) }
+
+        it 'returns the origin date' do
+          expect(calculation.before(origin)).to eq origin
+        end
+      end
+
+      context 'and the origin is inactive' do
+        let(:origin) { Date.new(2012, 1, 13) }
+
+        it 'returns the first active date before the origin' do
+          expect(calculation.before(origin)).to eq Date.new(2012, 1, 12)
+        end
+      end
     end
   end
 
   describe '#after' do
-    it 'returns the date the number of active days after the origin date' do
-      expect(calculation.after(Date.new(2012, 1, 2))).to eq(
-        Date.new(2012, 1, 18)
-      )
+    context 'when the number is non-zero' do
+      let(:number) { 10 }
+
+      it 'returns the appropriate date after the origin' do
+        expect(calculation.after(Date.new(2012, 1, 2))).to eq(
+          Date.new(2012, 1, 18)
+        )
+      end
+    end
+
+    context 'when the number is zero' do
+      let(:number) { 0 }
+
+      context 'and the origin is active' do
+        let(:origin) { Date.new(2012, 1, 11) }
+
+        it 'returns the origin' do
+          expect(calculation.after(origin)).to eq origin
+        end
+      end
+
+      context 'and the origin is inactive' do
+        let(:origin) { Date.new(2012, 1, 8) }
+
+        it 'returns the first active date after the origin' do
+          expect(calculation.after(origin)).to eq Date.new(2012, 1, 9)
+        end
+      end
     end
   end
 end
