@@ -45,6 +45,14 @@ RSpec.describe Clavius::Calculation::DaysFrom do
         expect { calculation }.to raise_error TypeError
       end
     end
+
+    context 'with a negative integer' do
+      let(:number) { -1 }
+
+      it 'fails hard' do
+        expect { calculation }.to raise_error ArgumentError
+      end
+    end
   end
 
   describe '#before' do

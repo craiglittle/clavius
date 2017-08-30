@@ -5,6 +5,8 @@ module Clavius
       def initialize(schedule, number)
         @schedule = schedule
         @number   = Integer(number)
+
+        fail ArgumentError, 'negative number' if @number < 0
       end
 
       def before(origin)
