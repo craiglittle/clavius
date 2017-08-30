@@ -2,23 +2,45 @@ module Clavius
   module Calculation
     class DaysFrom
 
-      def initialize(schedule, number_of_days)
-        @schedule       = schedule
-        @number_of_days = Integer(number_of_days)
+      def initialize(schedule, number)
+        @schedule = schedule
+        @number   = Integer(number)
       end
 
-      def before(date)
-        schedule.before(date).take(number_of_days).to_a.last
+      def before(origin)
+        calculated_day(:before, origin)
       end
 
-      def after(date)
-        schedule.after(date).take(number_of_days).to_a.last
+      def after(origin)
+        calculated_day(:after, origin)
       end
 
       protected
 
       attr_reader :schedule,
-                  :number_of_days
+                  :number
+
+      private
+
+      def calculated_day(direction, origin)
+        return zeroeth_day(direction, origin) if number.zero?
+
+        schedule.public_send(direction, origin).take(number).to_a.last
+      end
+
+      def zeroeth_day(direction, origin)
+        self
+          .class
+          .new(schedule, 1)
+          .public_send(direction, zeroeth_origin(direction, origin))
+      end
+
+      def zeroeth_origin(direction, origin)
+        case direction
+        when :before then origin.next_day
+        when :after  then origin.prev_day
+        end
+      end
 
     end
   end
