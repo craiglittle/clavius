@@ -4,7 +4,7 @@ gemspec
 
 group :ci do
   gem 'codeclimate-test-reporter', '~> 1.0',    require: false
-  gem 'simplecov',                 '~> 0.14.0', require: false
+  gem 'simplecov',                 '~> 0.15.0', require: false
 end
 
 group :development do
