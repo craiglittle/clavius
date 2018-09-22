@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Clavius::Schedule do
   subject(:schedule) { described_class.new(&config) }
 

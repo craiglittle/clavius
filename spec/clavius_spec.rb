@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Clavius do
   context 'when configured' do
     before do
