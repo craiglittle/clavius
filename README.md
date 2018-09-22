@@ -1,7 +1,7 @@
 # Clavius
 
 [![Gem Version](https://badge.fury.io/rb/clavius.svg)](http://badge.fury.io/rb/clavius)
-[![Build Status](https://travis-ci.org/craiglittle/clavius.svg?branch=master)](https://travis-ci.org/craiglittle/clavius)
+[![Build Status](https://travis-ci.com/craiglittle/clavius.svg?branch=master)](https://travis-ci.com/craiglittle/clavius)
 [![Code Climate](https://codeclimate.com/github/craiglittle/clavius/badges/gpa.svg)](https://codeclimate.com/github/craiglittle/clavius)
 [![Test Coverage](https://codeclimate.com/github/craiglittle/clavius/badges/coverage.svg)](https://codeclimate.com/github/craiglittle/clavius)
 [![Dependency Status](https://gemnasium.com/craiglittle/clavius.svg)](https://gemnasium.com/craiglittle/clavius)
