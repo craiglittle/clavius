@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Clavius
   module Time
     WEEKDAYS   = %i[sun mon tue wed thu fri sat].freeze

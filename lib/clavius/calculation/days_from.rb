@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Clavius
   module Calculation
     class DaysFrom
@@ -6,7 +8,7 @@ module Clavius
         @schedule = schedule
         @number   = Integer(number)
 
-        fail ArgumentError, 'negative number' if @number < 0
+        fail ArgumentError, 'negative number' if @number.negative?
       end
 
       def before(origin)

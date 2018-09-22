@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Clavius::Calculation::DaysFrom do
   subject(:calculation) { described_class.new(schedule, number) }
 

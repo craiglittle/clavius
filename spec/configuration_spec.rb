@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Clavius::Configuration do
   subject(:configuration) {
     described_class.new do |c|
