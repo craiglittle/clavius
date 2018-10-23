@@ -51,7 +51,7 @@ module Clavius
         .select(&method(:active?))
     end
 
-    protected
+    private
 
     attr_reader :configuration
 

@@ -26,11 +26,9 @@ module Clavius
       @excluded ||= exception_configuration(raw.excluded)
     end
 
-    protected
+    private
 
     attr_reader :raw
-
-    private
 
     def exception_configuration(dates)
       dates

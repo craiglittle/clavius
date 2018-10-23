@@ -19,12 +19,10 @@ module Clavius
         calculated_day(:after, origin)
       end
 
-      protected
+      private
 
       attr_reader :schedule,
                   :number
-
-      private
 
       def calculated_day(direction, origin)
         return zeroeth_day(direction, origin) if number.zero?
