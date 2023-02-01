@@ -1,4 +1,4 @@
-name: Run build
+name: build
 
 on:
   push:
