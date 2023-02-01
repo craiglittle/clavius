@@ -3,19 +3,23 @@
 module Clavius
   class Configuration
 
+    module Default
+      WEEKDAYS = Set.new(%i[mon tue wed thu fri]).freeze
+      INCLUDED = Set.new.freeze
+      EXCLUDED = Set.new.freeze
+    end
+
     def initialize
       @raw = Raw.new.tap do |raw| yield raw if block_given? end
     end
 
     def weekdays
-      @weekdays ||= begin
+      @weekdays ||=
         raw
           .weekdays
           .select { |weekday| Time::WEEKDAYS.include?(weekday) }
-          .map    { |weekday| Time::WEEKDAYS.index(weekday) }
-          .to_set
+          .to_set { |weekday| Time::WEEKDAYS.index(weekday) }
           .freeze
-      end
     end
 
     def included
@@ -33,18 +37,11 @@ module Clavius
     def exception_configuration(dates)
       dates
         .select { |date| date.respond_to?(:to_date) }
-        .map(&:to_date)
-        .to_set
+        .to_set(&:to_date)
         .freeze
     end
 
     Raw = Struct.new(:weekdays, :included, :excluded) do
-      module Default
-        WEEKDAYS = Set.new(%i[mon tue wed thu fri]).freeze
-        INCLUDED = Set.new.freeze
-        EXCLUDED = Set.new.freeze
-      end
-
       def initialize(*)
         super
 

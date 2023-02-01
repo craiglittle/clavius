@@ -12,6 +12,7 @@ Gem::Specification.new do |gem|
   gem.homepage    = 'https://github.com/craiglittle/clavius'
   gem.license     = 'MIT'
   gem.files       = Dir['lib/**/*', 'README.md']
+  gem.metadata    = {'rubygems_mfa_required' => 'true'}
 
-  gem.required_ruby_version = '>= 2.3'
+  gem.required_ruby_version = '>= 2.7'
 end
