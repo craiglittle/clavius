@@ -46,6 +46,6 @@ for commit messages.
 
 ## Copyright
 
-Copyright (c) 2015-2019 Craig Little. See [LICENSE][license] for details.
+Copyright (c) 2015-2023 Craig Little. See [LICENSE][license] for details.
 
 [license]: https://github.com/craiglittle/clavius/blob/master/LICENSE
